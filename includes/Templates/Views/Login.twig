@@ -1,0 +1,18 @@
+{% extends 'html5.twig' %}
+
+{% block content %}
+    <div class="ui inverted segment" style="margin:10vw auto;max-width:400px">
+        {% if errors %}<div class="ui red message">{{ errors|join('<br>')|raw }}</div>{% endif %}
+        <form class="ui inverted form" method="post">
+            <div class="field">
+                <label>Login</label>
+                <input type="text" name="login">
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password">
+            </div>
+            <button class="ui button" type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}

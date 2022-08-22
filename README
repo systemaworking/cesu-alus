@@ -1,0 +1,7 @@
+1. compose install
+2. ./phinx.php set mysql auth data
+3. ./vendor/bin/phinx migrate
+4. nginx set:
+    location / {
+        try_files $uri $uri/ /index.php;
+    }

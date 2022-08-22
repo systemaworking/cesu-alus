@@ -1,0 +1,16 @@
+{% extends 'html5.twig' %}
+
+{% block content %}
+    {% include 'Views/Worker/Menu.twig' %}
+
+    <div class="ui form">
+        <div class="field">
+            <label>Name</label>
+            <input type="text" name="name" value="{{ input('name') }}"
+        </div>
+        <div class="field">
+            <label>Short Text</label>
+            <textarea rows="2"></textarea>
+        </div>
+    </div>
+{% endblock %}

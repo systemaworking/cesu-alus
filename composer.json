@@ -1,0 +1,19 @@
+{
+    "name": "root/test-cesu-alus",
+    "type": "project",
+    "authors": [
+        {
+            "name": "systemaworking",
+            "email": "69110904+systemaworking@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.4",
+        "robmorgan/phinx": "^0.12.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cesu\\": "includes"
+        }
+    }
+}
