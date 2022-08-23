@@ -2,5 +2,8 @@
 
 {% block content %}
     {% include 'Views/Worker/Menu.twig' %}
+    <h2>My reports</h2>
+    {% if errors %}<div class="ui red message">{{ errors|join('<br>')|raw }}</div>{% endif %}
 
+    {% include 'Views/Parts/ReportList.twig' %}
 {% endblock %}

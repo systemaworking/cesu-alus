@@ -3,25 +3,25 @@ namespace Cesu;
 
 class Router
 {
-    private static $routes = [];
+    private static array $routes = [];
 
     public static function get( $uri, $callback, $name = false )
     {
-        static::$routes[] = [
-            "method" => "GET",
-            "uri" => $uri,
-            "callback" => $callback,
-            "name" => $name,
-        ];
+        static::addRoute( "get", $uri, $callback, $name );
     }
 
     public static function post( $uri, $callback, $name = false )
     {
+        static::addRoute( "post", $uri, $callback, $name );
+    }
+
+    private static function addRoute( $method, $uri, $callback, $name )
+    {
         static::$routes[] = [
-            "method" => "GET",
-            "uri" => $uri,
+            "method"   => strtoupper( $method ),
+            "uri"      => $uri,
             "callback" => $callback,
-            "name" => $name,
+            "name"     => $name,
         ];
     }
 
@@ -29,7 +29,7 @@ class Router
     {
         foreach( static::$routes as $route )
         {
-            if ( $route["name"] != $routeName ) continue;
+            if ( $route["name"] !== $routeName ) continue;
 
             return static::getUrlPrefix().$route["uri"];
         }
@@ -37,7 +37,7 @@ class Router
         return false;
     }
 
-    private static function getUrlPrefix()
+    public static function getUrlPrefix()
     {
         $uriPrefix = isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]
             ? str_ireplace(rtrim(str_replace("\\", "/", $_SERVER["DOCUMENT_ROOT"]), "/\\"), "", str_replace("\\", "/", ROOT_DIR )) : "";
@@ -57,7 +57,7 @@ class Router
 
         foreach( static::$routes as $route )
         {
-            if ( $_SERVER["REQUEST_METHOD"] != $route['method'] )
+            if ( $_SERVER["REQUEST_METHOD"] !== $route['method'] )
             {
                 continue;
             }

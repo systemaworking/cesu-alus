@@ -15,6 +15,15 @@ class User
         unset( $_SESSION["user"] );
     }
 
+    public static function get( $field = false )
+    {
+        if ( !static::isValid() ) return false;
+
+        return $field !== false
+            ? ( $_SESSION["user"][ $field ] ?? false )
+            : $_SESSION["user"];
+    }
+
     public static function tryLogin( string $login, string $password )
     {
         $user = Db::selectRow( "*", "users", [

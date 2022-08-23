@@ -22,7 +22,7 @@ final class Documents extends AbstractMigration
         $table = $this->table( "documents" );
         $table
             ->addColumn( "report_id", "integer", [ "null" => false ] )
-            ->addColumn( "create_date", "datetime", [ "null" => false ] )
+            ->addColumn( "create_date", "date", [ "null" => false ] )
             ->addColumn( "number", "string", ["limit" => 50, "null" => false ] )
             ->addColumn( "producer", "string", ["limit" => 50, "null" => false ] )
             ->addColumn( "price", "decimal", [ "null" => false, 'precision'=> 25, 'scale'=> 2 ] )

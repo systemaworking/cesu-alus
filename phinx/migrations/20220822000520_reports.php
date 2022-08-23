@@ -20,8 +20,8 @@ final class Reports extends AbstractMigration
     {
         $table = $this->table( "reports" );
         $table
-            ->addColumn( "name", "string", [ "null" => false, "limit" => 50 ] )
             ->addColumn( "user_id", "integer", [ "null" => false ] )
+            ->addColumn("status", 'enum', ['values' => ['accepted', 'new'], "null" => false, "default" => "new" ] )
             ->addForeignKey( "user_id", "users", "id", ['delete'=> 'CASCADE', 'update'=> 'CASCADE'] )
             ->save();
     }

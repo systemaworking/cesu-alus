@@ -30,6 +30,17 @@ class Template
                 return Validator::input( $name );
             } ) );
 
+            $twig->addFunction( new TwigFunction( "mix", function ( $name ) {
+                global $mixCache;
+
+                if ( !isset( $mixCache ) )
+                {
+                    $mixCache = json_decode( file_get_contents( ROOT_DIR."/dist/mix-manifest.json" ), true );
+                }
+
+                return $mixCache[ $name ] ? Router::getUrlPrefix()."/dist".$mixCache[ $name ] : "";
+            } ) );
+
             static::$instance = $twig;
         }
 

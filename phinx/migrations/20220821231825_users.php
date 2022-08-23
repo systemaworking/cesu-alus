@@ -26,6 +26,8 @@ final class Users extends AbstractMigration
             ->addIndex("login", ['unique' => true] )
             ->create();
 
+        $table->truncate();
+
         $table->insert( [ "login" => "worker1", "password" => md5( "test" ), "type" => "worker" ] )->saveData();
         $table->insert( [ "login" => "worker2", "password" => md5( "test" ), "type" => "worker" ] )->saveData();
         $table->insert( [ "login" => "worker3", "password" => md5( "test" ), "type" => "worker" ] )->saveData();

@@ -1,0 +1,22 @@
+{
+  "name": "test-cesu-alus",
+  "version": "1.0.0",
+  "description": "1. compose install\r 2. ./phinx.php set mysql auth data\r 3. ./vendor/bin/phinx migrate\r 4. nginx set:\r     location / {\r         try_files $uri $uri/ /index.php;\r     }",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx mix --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/systemaworking/cesu-alus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/systemaworking/cesu-alus/issues"
+  },
+  "homepage": "https://github.com/systemaworking/cesu-alus#readme",
+  "devDependencies": {
+    "laravel-mix": "^6.0.49"
+  }
+}

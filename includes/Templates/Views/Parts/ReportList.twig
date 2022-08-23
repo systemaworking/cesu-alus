@@ -1,0 +1,14 @@
+<div class="ui divided items">
+    {% for report in reports %}
+        <div class="item">
+            <div class="image">
+                <img src="{{ report.picture }}" style="max-width:150px;max-height: 150px">
+            </div>
+            <div class="content">
+                <div class="description">
+                    {{ report.comment }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

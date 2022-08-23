@@ -3,14 +3,18 @@
 {% block content %}
     {% include 'Views/Worker/Menu.twig' %}
 
-    <div class="ui form">
-        <div class="field">
-            <label>Name</label>
-            <input type="text" name="name" value="{{ input('name') }}"
-        </div>
-        <div class="field">
-            <label>Short Text</label>
-            <textarea rows="2"></textarea>
+    <div class="ui container">
+        <h2 class="ui header">Add report</h2>
+
+        <div class="ui primary button js-add-document">Add document</div><br>
+
+        {% include 'Views/Parts/DocumentList.twig' %}
+    </div>
+
+    <div class="ui modal js-add-document-modal">
+        <div class="header">Add document</div>
+        <div class="content">
+            {% include 'Views/Worker/AddDocument.twig' %}
         </div>
     </div>
 {% endblock %}

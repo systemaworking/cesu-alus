@@ -1,0 +1,39 @@
+<form class="ui form" method="post" enctype="multipart/form-data" onsubmit="return false">
+    <input type="hidden" name="report_id" value="{{ report_id }}">
+    <div class="ui red message js-errors" style="display: none"></div>
+    <div class="field">
+        <label>Dokumenta datums</label>
+        <div class="ui calendar">
+            <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input type="text" name="create_date">
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label>Dokumenta numurs</label>
+        <input type="text" name="number">
+    </div>
+    <div class="field">
+        <label>Uzņēmums / iestāde, kas izsniedza dokumentu</label>
+        <input type="text" name="producer">
+    </div>
+    <div class="field">
+        <label>Summa</label>
+        <input type="text" name="price">
+    </div>
+    <div class="field">
+        <label>Komentās / iemesls, kam izlietoti līdzekļi</label>
+        <textarea name="comment"></textarea>
+    </div>
+    <div class="ui placeholder segment">
+        <div class="ui icon header">
+            <i class="pdf file outline icon"></i>
+            Nav attelu.
+        </div>
+        <div class="ui primary button" onclick="$( this ).next().click()">Add picture</div>
+        <input type="file" name="picture" style="visibility: hidden">
+    </div>
+    <button class="ui button js-submit">Submit</button>
+    <button class="ui button js-close">Close</button>
+</form>

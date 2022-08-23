@@ -6,6 +6,7 @@ use Cesu\Db\SqlBuilder;
 class Db
 {
     private static $instance = null;
+    private static $lastSQL = "";
 
     private static function init()
     {
@@ -34,9 +35,21 @@ class Db
         return static::$instance;
     }
 
+    public static function getSQL():string
+    {
+        return static::$lastSQL;
+    }
+
+    public static function getError():string
+    {
+        return static::getSQL()."\n".static::$instance->error;
+    }
+
     public static function query( $sql )
     {
         $db = static::init();
+
+        static::$lastSQL = $sql;
 
         return $db->query( $sql );
     }
@@ -97,5 +110,70 @@ class Db
         ]);
 
         return static::queryRow( $sql );
+    }
+
+    public static function delete( $tables, $where = false )
+    {
+        static::init();
+
+        $sql = ( new SqlBuilder( static::$instance ) )->build([
+            "type" 	 => "delete",
+            "tables" => $tables,
+            "where"  => $where,
+        ]);
+
+        return static::query( $sql );
+    }
+
+    public static function update( $tables, $fields, $where = false )
+    {
+        static::init();
+
+        $sql = ( new SqlBuilder( static::$instance ) )->build([
+            "type" 	 => "update",
+            "fields" => $fields,
+            "tables" => $tables,
+            "where"  => $where,
+        ]);
+
+        return static::query( $sql );
+    }
+
+    public static function countRows( $tables, $where = false, $limit = false )
+    {
+        static::init();
+
+        $sql = ( new SqlBuilder( static::$instance ) )->build( [
+            "type" => "select",
+            "fields" => "count(*) cnt",
+            "tables" => $tables,
+            "where" => $where,
+            "limit" => $limit,
+        ] );
+
+        $row = static::queryRow( $sql );
+        if ( $row === false ) return false;
+
+        return $row[ "cnt" ];
+    }
+
+    public static function insert( $tables, $fields, $onDuplicateKeyUpdate = false )
+    {
+        static::init();
+
+        $sql = ( new SqlBuilder( static::$instance ) )->build( [
+            "type"   => "insert",
+            "fields" => $fields,
+            "tables" => $tables,
+            "onDuplicateKeyUpdate" => $onDuplicateKeyUpdate,
+        ] );
+
+        $rs = static::query( $sql );
+        if ( !$rs )
+        {
+            return false;
+        }
+
+        return static::$instance->insert_id > 0 ? static::$instance->insert_id : true;
     }
 }

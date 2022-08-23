@@ -7,7 +7,14 @@
     </head>
     <body>
         {% block content %}{% endblock %}
+        <script>
+            var Urls = {
+                AddDocument: "{{ route('add-document') }}",
+                AddReport: "{{ route('add-report') }}"
+            };
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
+        <script src="{{ mix('/app.js') }}"></script>
     </body>
 </html>
